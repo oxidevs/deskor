@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lg-color: rgba(0, 0, 0, 1);
+  --lg-width: 1.5px;
+  --lg-width2: 1px;
+  --lg-size: 4px;
+}
+
+html,
+body {
+  @apply bg-transparent overflow-hidden rounded-lg;
+}
+
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      var(--lg-color) var(--lg-width),
+      transparent var(--lg-width2)
+    ),
+    linear-gradient(
+      to bottom,
+      var(--lg-color) var(--lg-width),
+      transparent var(--lg-width2)
+    );
+  background-repeat: repeat;
+  background-size: var(--lg-size) var(--lg-size);
+}
+
+.bg-grid2 {
+  background-image: linear-gradient(
+    135deg,
+    var(--lg-color) var(--lg-width),
+    transparent var(--lg-width2)
+  );
+  background-repeat: repeat;
+  background-size: var(--lg-size) var(--lg-size);
+}
+
+.clickArea {
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+}
