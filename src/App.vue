@@ -35,6 +35,11 @@ export default {
     return { widgets: [], mounts: {} };
   },
   mounted() {
+    // 300
+    // #fdba74
+    // 400
+    // #fb923c
+
     electronAPI.loadPlugins((evt, widgets, usedList) => {
       this.widgets = widgets.map((a) => {
         return {

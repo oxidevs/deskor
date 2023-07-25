@@ -9,6 +9,8 @@ module.exports = {
   // frame: false,
   // backgroundColor: "transparent",
 
+  icon: path.join(__dirname, "../public/deskor-icon.png"),
+
   webPreferences: {
     preload: path.resolve(__dirname, "./preload.js"),
     nodeIntegration: true, // 確保渲染進程可以使用 Node.js API

@@ -13,7 +13,7 @@ class Widget {
     this.#pluginData = packageInfo?.pluginData ?? null;
 
     this.#broswerView = new BrowserView(this.#getConfig());
-    this.#broswerView.setBounds({ x: 0, y: 0, width: 200, height: 200 });
+    this.#broswerView.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     this.#broswerView.setAutoResize({ width: true });
     this.#broswerView.webContents.on("did-finish-load", () => {
       this.#browserViewLoaded();
@@ -79,6 +79,7 @@ class Widget {
         webPreferences: {
           preload: preloadData,
           nodeIntegration: true,
+          webviewTag: true,
         },
       };
     }
