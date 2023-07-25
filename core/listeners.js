@@ -40,7 +40,12 @@ module.exports = (win) => {
     });
 
     const setting = require(path.resolve(__dirname, "../setting.json"));
-    // usedList = widgets
+    usedList = setting.usedList.filter((p) => {
+      const w = widgets.find((w) => w.name === p);
+      return w && w.isVaild();
+    });
+
+    // widgets
     //   .filter((w) => {
     //     return w.isVaild() && setting.usedList.includes(w.name);
     //   })
