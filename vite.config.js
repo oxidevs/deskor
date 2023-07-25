@@ -5,6 +5,14 @@ import path from "path";
 const getConfig = () => {
   const viteConfig = {
     plugins: [vue()],
+    build: {
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, "index.html"),
+          store: path.resolve(__dirname, "store/index.html"),
+        },
+      },
+    },
   };
 
   if (process.env.NODE_ENV === "production")
