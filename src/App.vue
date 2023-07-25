@@ -1,9 +1,6 @@
 <template>
-  <div>
-    {{ getAvailabeWidget }}
-    <br />
-    {{ Object.values(mounts) }}
-    <div class="flex gap-1 p-1">
+  <div class="flex h-screen w-screen justify-end">
+    <!-- <div class="flex gap-1 p-1">
       <button
         v-for="wv of getAvailabeWidget"
         :key="wv.name"
@@ -13,17 +10,17 @@
       >
         {{ wv.name }}
       </button>
-    </div>
+    </div> -->
     <div
       @resize="containerResize"
-      class="flex w-full flex-col space-y-2 bg-red-500 p-3"
+      class="flex h-full w-[300px] flex-col justify-between space-y-3 p-2"
     >
       <div
         :ref="`wv-${wv.name}`"
         :id="wv.name"
         v-for="wv of Object.values(mounts)"
         :key="wv.name"
-        class="widget border bg-blue-500"
+        class=""
       />
     </div>
   </div>
