@@ -23,7 +23,7 @@ const saveSetting = () => {
 };
 
 module.exports = (win) => {
-  // win.setIgnoreMouseEvents(true, { forward: true });
+  win.setIgnoreMouseEvents(true, { forward: true });
 
   ipcMain.on("set-ignore-mouse-evnets", (event, ...args) => {
     // console.log("set-ignore-mouse-events", args);
