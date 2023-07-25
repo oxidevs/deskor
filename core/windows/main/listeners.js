@@ -1,10 +1,9 @@
 const { ipcMain } = require("electron");
-const { BrowserWindow, BrowserView } = require("electron");
-// const { BrowserWindow } = require("electron-acrylic-window");
+const { BrowserWindow } = require("electron");
 const path = require("path");
 const fs = require("fs");
-// const screenCapture = require("./screenCapture");
-const { loadPlugins } = require("./plugin");
+const { loadPlugins } = require("../../plugin");
+const settingJSON = "../../../setting.json";
 
 let widgets = [];
 let usedList = [];
@@ -15,7 +14,7 @@ const saveSetting = () => {
   };
 
   fs.writeFile(
-    path.resolve(__dirname, "../setting.json"),
+    path.resolve(__dirname, settingJSON),
     JSON.stringify(setting),
     (err) => {
       if (err) console.log("[Error] setting can't save.");
@@ -39,7 +38,7 @@ module.exports = (win) => {
       return w.status();
     });
 
-    const setting = require(path.resolve(__dirname, "../setting.json"));
+    const setting = require(path.resolve(__dirname, settingJSON));
     usedList = setting.usedList.filter((p) => {
       const w = widgets.find((w) => w.name === p);
       return w && w.isVaild();

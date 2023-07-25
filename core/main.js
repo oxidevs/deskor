@@ -1,32 +1,11 @@
 const { app, ipcMain } = require("electron");
-const { BrowserWindow, BrowserView } = require("electron");
-// const { BrowserWindow } = require("electron-acrylic-window");
 
-const mainConfig = require("./mainConfig");
-const listeners = require("./listeners");
+const mainWindow = require("./windows/main");
+const settingWindow = require("./windows/setting");
 
 const createWindow = () => {
-  const win = new BrowserWindow(mainConfig);
-
-  // ipc Listeners
-  listeners(win);
-
-  if (process.env.NODE_ENV === "dev") {
-    win.loadURL("http://localhost:3000");
-  } else {
-    win.loadFile("./dist/index.html");
-  }
-
-  // 打開開發工具
-  win.webContents.openDevTools();
-
-  const winSetting = new BrowserWindow({
-    backgroundMaterial: "acrylic",
-    transparent: true,
-  });
-  winSetting.setMenuBarVisibility(false);
-
-  winSetting.loadURL("http://localhost:3000/setting/");
+  mainWindow.create();
+  settingWindow.create();
 };
 
 function timer() {
