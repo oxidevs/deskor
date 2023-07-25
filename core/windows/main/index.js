@@ -1,4 +1,4 @@
-const { BrowserWindow, BrowserView } = require("electron");
+const { BrowserWindow, screen } = require("electron");
 // const { BrowserWindow } = require("electron-acrylic-window");
 const path = require("path");
 const listeners = require("./listeners");
@@ -6,11 +6,13 @@ const listeners = require("./listeners");
 const config = {
   width: 800,
   height: 600,
-  // resizable: false,
-  // transparent: true,
+  resizable: false,
+  transparent: true,
   // backgroundColor: "white",
-  // frame: false,
+  frame: false,
   // backgroundColor: "transparent",
+  skipTaskbar: true,
+  minimizable: false,
 
   icon: path.join(__dirname, "../../../public/deskor-icon.png"),
 
@@ -34,6 +36,10 @@ let win = null;
 const create = () => {
   win = new BrowserWindow(config);
 
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const workArea = primaryDisplay.workArea;
+  win.setBounds(workArea);
+
   // ipc Listeners
   listeners(win);
 
@@ -44,7 +50,7 @@ const create = () => {
   }
 
   // 打開開發工具
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 };
 
 module.exports = {
