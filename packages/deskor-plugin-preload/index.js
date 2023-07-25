@@ -31,6 +31,16 @@ const pluginPreloads = (widgetName, customPreload) => {
     }
 
     calcWidgetHeight();
+
+    const widget = document.body;
+    widget.addEventListener("mouseenter", () => {
+      console.log("mouseenter");
+      ipcRenderer.send("set-ignore-mouse-evnets", false);
+    });
+    widget.addEventListener("mouseleave", () => {
+      console.log("mouseleave");
+      ipcRenderer.send("set-ignore-mouse-evnets", true, { forward: true });
+    });
   });
 
   customPreload();
