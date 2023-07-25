@@ -9,7 +9,7 @@ const getConfig = () => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, "index.html"),
-          store: path.resolve(__dirname, "store/index.html"),
+          store: path.resolve(__dirname, "setting/index.html"),
         },
       },
     },
