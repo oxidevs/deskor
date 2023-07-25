@@ -19,6 +19,14 @@ const createWindow = () => {
 
   // 打開開發工具
   win.webContents.openDevTools();
+
+  const winSetting = new BrowserWindow({
+    backgroundMaterial: "acrylic",
+    transparent: true,
+  });
+  winSetting.setMenuBarVisibility(false);
+
+  winSetting.loadURL("http://localhost:3000/setting/");
 };
 
 function timer() {
