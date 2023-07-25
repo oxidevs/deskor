@@ -10,5 +10,5 @@
   "dependencies": {
     "electron": "^25.3.1"
   },
-  "license": "ISC"
+  "license": "MIT"
 }
