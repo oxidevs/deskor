@@ -70,13 +70,13 @@ module.exports = (win) => {
   });
 
   ipcMain.on("set-container-rect", (evt, data) => {
-    // console.log(data);
+    // console.log("set-container-rect", data);
 
     const widget = widgets.find((w) => w.name === data.name);
     const bv = widget.getBroswerView();
     bv.setBounds({
-      x: data.x,
-      y: data.y,
+      x: Math.round(data.x),
+      y: Math.round(data.y),
       width: data.width,
       height: data.height,
     });
