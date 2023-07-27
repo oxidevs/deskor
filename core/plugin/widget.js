@@ -4,14 +4,57 @@ const preloadChecker = require("./preloadChecker");
 
 class Widget {
   name = "";
+  displayName = "";
   #pluginData = null;
-
   #broswerView;
+  #status = true;
 
   constructor(packageInfo) {
-    this.name = packageInfo?.name ?? "";
-    this.#pluginData = packageInfo?.pluginData ?? null;
+    this.name = packageInfo?.name ?? "unknow";
+    this.#pluginData = this.#pluginDataResolve(packageInfo?.pluginData);
 
+    this.createBrowserView();
+  }
+
+  #pathResolver(file) {
+    if (file.indexOf(`plugins\\${this.name}`) > -1) return file;
+
+    return path.resolve(__dirname, `../../plugins/${this.name}/${file}`);
+  }
+
+  #pluginDataResolve(pluginData) {
+    if (!this.name || this.name === "unknow") {
+      this.#status = false;
+      return null;
+    }
+
+    let pd = pluginData ?? null;
+
+    if (pd) {
+      pd.main && (pd.main = this.#pathResolver(pd.main));
+      pd.preload && (pd.preload = this.#pathResolver(pd.preload));
+
+      // console.log(pd);
+    } else {
+      this.#status = false;
+    }
+
+    return pd;
+  }
+
+  status() {
+    return this.#status;
+  }
+
+  getView() {
+    return this.#pluginData.main;
+  }
+
+  getPreload() {
+    return this.#pluginData.preload;
+  }
+
+  createBrowserView() {
     this.#broswerView = new BrowserView(this.#getConfig());
     this.#broswerView.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     this.#broswerView.setAutoResize({ width: true });
@@ -20,43 +63,18 @@ class Widget {
     });
   }
 
-  status() {
-    return this.#pluginData && true;
-  }
-
-  getView() {
-    let html = this.#pluginData?.html ?? "";
-
-    if (html) {
-      html = path.resolve(__dirname, `../../plugins/${this.name}/${html}`);
-    }
-
-    return html;
-  }
-
-  getPreload() {
-    let preload = this.#pluginData?.preload ?? null;
-
-    if (preload) {
-      preload = path.resolve(
-        __dirname,
-        `../../plugins/${this.name}/${preload}`
-      );
-    }
-
-    return preload;
-  }
-
   getBroswerView() {
     return this.#broswerView;
   }
 
   #browserViewLoaded() {
-    console.log(`bv-${this.name} loaded!!`);
+    // console.log(`bv-${this.name} loaded!!`);
     this.#broswerView.webContents.insertCSS(`
       html, body {
         margin: 0px !important;
         padding: 0px !important;
+        border-radius: 0.375rem/* 4px */;
+        overflow: hidden;
       }
     `);
   }
@@ -70,14 +88,12 @@ class Widget {
   }
 
   #getConfig() {
-    const preloadData = this.getPreload();
-
     let config = {};
 
     if (this.isVaild()) {
       config = {
         webPreferences: {
-          preload: preloadData,
+          preload: this.getPreload(),
           nodeIntegration: true,
           webviewTag: true,
         },
