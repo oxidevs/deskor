@@ -1,0 +1,24 @@
+{
+  "name": "deskor-ui",
+  "version": "0.0.0",
+  "scripts": {
+    "vite:dev": "cross-env NODE_ENV=dev vite --port 3000",
+    "vite:build": "cross-env NODE_ENV=production vite build",
+    "vite:github-build": "cross-env NODE_ENV=github vite build --mode github",
+    "vite:serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "3.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "3.1.5",
+    "autoprefixer": "^10.4.14",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwindcss": "^0.1.5",
+    "vitawind": "^2.2.4",
+    "vite": "^4.4.7"
+  }
+}
