@@ -1,0 +1,59 @@
+{
+  "name": "deskor",
+  "version": "0.0.0",
+  "main": "core/main.js",
+  "scripts": {
+    "electron:dev": "cross-env NODE_ENV=dev electron .",
+    "electron:build": "electron-builder",
+    "electron:serve": "vite preview",
+    "dev": "npm-run-all -p vite:dev electron:dev",
+    "build": "npm-run-all -s vite:build electron:build",
+    "serve": "vite preview",
+    "github-build": "npm-run-all -s vite:github-build electron:build"
+  },
+  "dependencies": {
+    "deskor-plugin-preload": "^0.0.1-alpha.2"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.22.7",
+    "@babel/traverse": "^7.22.8",
+    "cross-env": "^7.0.3",
+    "electron": "^25.3.1",
+    "electron-acrylic-window": "^0.5.11",
+    "electron-builder": "^24.4.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1"
+  },
+  "build": {
+    "appId": "com.huibizhang.deskor",
+    "productName": "Deskor",
+    "directories": {
+      "output": "pack",
+      "buildResources": "plugin"
+    },
+    "files": [
+      "dist/**/*",
+      "plugin/**/*",
+      "main.js",
+      "preload.js",
+      "build/**/*"
+    ],
+    "asar": false,
+    "win": {
+      "target": "NSIS",
+      "icon": "public/icon.ico"
+    },
+    "mac": {
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "icon": "assets/icon.ico"
+    },
+    "publish": {
+      "provider": "github",
+      "repo": "deskor",
+      "owner": "huibizhang",
+      "releaseType": "release"
+    }
+  }
+}
