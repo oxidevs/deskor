@@ -14,7 +14,7 @@ const config = {
   skipTaskbar: true,
   minimizable: false,
 
-  icon: path.join(__dirname, "../../../public/deskor-icon.png"),
+  icon: path.join(__dirname, "../../../../ui/public/deskor-icon.png"),
 
   webPreferences: {
     preload: path.resolve(__dirname, "./preload.js"),
