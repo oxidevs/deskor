@@ -6,6 +6,7 @@ const getConfig = () => {
   const viteConfig = {
     plugins: [vue()],
     build: {
+      outDir: "ui",
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, "index.html"),

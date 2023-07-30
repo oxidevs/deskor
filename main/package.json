@@ -42,11 +42,11 @@
       "buildResources": "plugin"
     },
     "files": [
-      "dist/**/*",
-      "plugin/**/*",
+      "ui/**/*",
       "main.js",
       "preload.js",
-      "build/**/*"
+      "build/**/*",
+      "icons/**/*"
     ],
     "asar": false,
     "win": {

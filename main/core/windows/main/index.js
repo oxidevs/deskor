@@ -14,7 +14,7 @@ const config = {
   skipTaskbar: true,
   minimizable: false,
 
-  icon: path.join(__dirname, "../../../../ui/public/deskor-icon.png"),
+  icon: path.join(__dirname, "../../icons/deskor-icon.png"),
 
   webPreferences: {
     preload: path.resolve(__dirname, "./preload.js"),
@@ -46,7 +46,7 @@ const create = () => {
   if (process.env.NODE_ENV === "dev") {
     win.loadURL("http://localhost:3000");
   } else {
-    win.loadFile("./dist/index.html");
+    win.loadFile("./ui/index.html");
   }
 
   // 打開開發工具
